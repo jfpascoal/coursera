@@ -20,8 +20,11 @@ class RecFunSuite {
   @Test def `balance: counting is not enough`: Unit =
     assert(!balance("())(".toList))
 
+  @Test def `balance: "((-)(()-))"`: Unit =
+    assert (balance("((-)(()-))(((a(t)...)))".toList))
+
   // ------ countChange tests -------------------------------------------------
-/**
+
   @Test def `countChange: example given in instructions`: Unit =
     assertEquals(3, countChange(4,List(1,2)))
 
@@ -33,7 +36,13 @@ class RecFunSuite {
 
   @Test def `countChange: unsorted CHF`: Unit =
     assertEquals(1022, countChange(300,List(500,5,50,100,20,200,10)))
-*/
+
+  @Test def `countChange: no money`: Unit =
+    assertEquals(1, countChange(0, List(1, 2, 5, 10)))
+
+  @Test def `countChange: no coins`: Unit =
+    assertEquals(0, countChange(200, List()))
+
   // ------ pascal tests ------------------------------------------------------
 
   @Test def `pascal: col=0,row=2`: Unit =
@@ -44,6 +53,12 @@ class RecFunSuite {
 
   @Test def `pascal: col=1,row=3`: Unit =
     assertEquals(3, pascal(1, 3))
+
+  @Test def `pascal: col=0,row=0`: Unit =
+    assertEquals(1, pascal(0, 0))
+
+  @Test def `pascal: col=1,row=1`: Unit =
+    assertEquals(1, pascal(1, 1))
 
   @Rule def individualTestTimeout = new org.junit.rules.Timeout(10 * 1000)
 }
